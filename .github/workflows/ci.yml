@@ -1,0 +1,38 @@
+name: solar test
+on:
+    push:
+        branches: 
+            - main
+            - 'feature/*'
+env:
+    MONGO_URI: 'mongodb+srv://supercluster.d83jj.mongodb.net/superData'
+    MONGO_USERNAME: superuser
+    MONGO_PASSWORD: SuperPassword
+
+jobs:
+    unit-testing:
+        strategy:
+            matrix:
+                os: [ubuntu-latest, macos-latest]
+                nodejs_v: [18, 20]
+                exclude:
+                    - os: macos-latest
+                      nodejs_v: 20
+        runs-on: ${{ matrix.os }}
+        steps:
+            - name: Checkout repo
+              uses: action/checkout@v4
+            - name: Install nodejs ${{ matrix.nodejs_v }}
+              uses: action/setup-node@v4
+              with:
+                  node-version: ${{ matrix.nodejs_v }}
+            - name: Install Dependency
+              run: npm install
+            - name: Run unit test
+              run: npm test
+            - name: Archive test result
+              uses: actions/upload-artifact@v4
+              with:
+                name: mocha-test-result
+                path: test-results.xml
+        
