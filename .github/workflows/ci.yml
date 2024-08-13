@@ -23,7 +23,7 @@ jobs:
             - name: Checkout repo
               uses: actions/checkout@v4
             - name: Install nodejs ${{ matrix.nodejs_v }}
-              uses: action/setup-node@v4
+              uses: actions/setup-node@v4
               with:
                   node-version: ${{ matrix.nodejs_v }}
             - name: Install Dependency
