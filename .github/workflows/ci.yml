@@ -35,4 +35,5 @@ jobs:
               with:
                 name: mocha-test-result-${{ matrix.os }}-${{ matrix.nodejs_v }}
                 path: test-results.xml
-        
+                retention-days: 7
+                overwrite: true
