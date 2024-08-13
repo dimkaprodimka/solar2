@@ -21,7 +21,7 @@ jobs:
         runs-on: ${{ matrix.os }}
         steps:
             - name: Checkout repo
-              uses: action/checkout@v4
+              uses: actions/checkout@v4
             - name: Install nodejs ${{ matrix.nodejs_v }}
               uses: action/setup-node@v4
               with:
